@@ -1,4 +1,9 @@
 package com.rockter.server.basic.servlet;
 
-public class LoginServlet {
+public class LoginServlet implements Servlet{
+
+    @Override
+    public void service() {
+        System.out.println("LoginServlet");
+    }
 }

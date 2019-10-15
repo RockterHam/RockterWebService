@@ -9,12 +9,13 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Handler;
 
 public class XmlRead {
-    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
+    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         //获取解析工厂
         SAXParserFactory factory = SAXParserFactory.newInstance();
         //从解析工厂获取解析器
@@ -26,8 +27,10 @@ public class XmlRead {
                         getResourceAsStream("com/rockter/server/basic/servlet/web.xml"), handler);
 
         WebContext context = new WebContext(handler.getEntitys(),handler.getMappings());
-        System.out.println(context.getClz("/g"));
-
+        String className = context.getClz("/g");
+        Class clz = Class.forName(className);
+        Servlet servlet = (Servlet) clz.getConstructor().newInstance();
+        servlet.service();
         //获取数据
 //        List<Entity> EntityList = handler.getEntitys();
 //        List<Mapping> mappingList = handler.getMappings();
