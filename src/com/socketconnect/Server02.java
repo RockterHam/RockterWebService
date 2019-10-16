@@ -27,11 +27,12 @@ public class Server02 {
     }
 
     public void receive(){
-        try {
-            Socket client = serverSocket.accept();
+        try(Socket client = serverSocket.accept();
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
+            InputStream is = client.getInputStream();) {
+
             System.out.println("客户端建立了连接");
             //获取请求协议
-            InputStream is = client.getInputStream();
             byte[] requestDatas = new byte[1024*512];
             int requestLenth = is.read(requestDatas);
             String requestData = new String(requestDatas,0,requestLenth);
@@ -58,6 +59,8 @@ public class Server02 {
             content.append("</html>");
             int responseLength = content.length();
             //响应头
+
+            //Socket n = serverSocket.accept();
             StringBuilder responseInfo = new StringBuilder();
             responseInfo.append("HTTP/1.1").append(blank);
             responseInfo.append("200").append(blank);
@@ -69,11 +72,9 @@ public class Server02 {
             responseInfo.append(CRLF);
             responseInfo.append(content.toString());
 
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
             bw.write(responseInfo.toString());
             bw.flush();
             System.out.println(responseInfo.toString());
-
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("建立连接失败");
