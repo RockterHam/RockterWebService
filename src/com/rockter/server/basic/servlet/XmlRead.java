@@ -23,8 +23,6 @@ public class XmlRead {
         //加载文档Document注册处理器
         //编写处理器
         WebHandler handler = new WebHandler();
-        parser.parse(Thread.currentThread().getContextClassLoader().
-                        getResourceAsStream("com/rockter/server/basic/servlet/web.xml"), handler);
 
         WebContext context = new WebContext(handler.getEntitys(),handler.getMappings());
         String className = context.getClz("/g");
