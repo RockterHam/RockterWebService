@@ -1,4 +1,4 @@
-package com.rockter.server.basic;
+package com.rockter.server.basic.test;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -17,7 +17,7 @@ public class ReflecTest {
         //2.类.class()
         clz = Phone.class;
         //3.Class.forName("Package.classname")
-        clz = Class.forName("com.rockter.server.basic.Phone");
+        clz = Class.forName("com.rockter.server.basic.test.Phone");
         Phone phone1 = (Phone) clz.getConstructor().newInstance();
         System.out.println(phone1);
     }

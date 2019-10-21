@@ -1,4 +1,4 @@
-package com.rockter.server.basic;
+package com.rockter.server.basic.test;
 
 public class Person {
     private String name;

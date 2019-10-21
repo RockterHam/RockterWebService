@@ -1,4 +1,4 @@
-package com.rockter.server.basic;
+package com.rockter.server.basic.test;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -20,7 +20,7 @@ public class XmlTest {
         //加载文档Document注册处理器
         //编写处理器
         PersonHandler handler = new PersonHandler();
-        parser.parse(Thread.currentThread().getContextClassLoader().getResourceAsStream("com/rockter/server/basic/p.xml"),
+        parser.parse(Thread.currentThread().getContextClassLoader().getResourceAsStream("com/rockter/server/basic/test/p.xml"),
                 handler);
 
         //获取数据

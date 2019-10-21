@@ -1,6 +1,5 @@
 package com.rockter.server.basic.servlet;
 
-import com.rockter.server.basic.Person;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -12,7 +11,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
 
 public class XmlRead {
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
@@ -23,9 +21,11 @@ public class XmlRead {
         //加载文档Document注册处理器
         //编写处理器
         WebHandler handler = new WebHandler();
+        parser.parse(Thread.currentThread().getContextClassLoader().
+                getResourceAsStream("com/rockter/server/basic/servlet/web.xml"), handler);
 
         WebContext context = new WebContext(handler.getEntitys(),handler.getMappings());
-        String className = context.getClz("/g");
+        String className = context.getClz("/reg");
         Class clz = Class.forName(className);
         Servlet servlet = (Servlet) clz.getConstructor().newInstance();
         servlet.service();

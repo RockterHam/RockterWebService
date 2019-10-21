@@ -3,7 +3,6 @@ package com.socketconnect;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.security.cert.CRL;
 import java.util.Date;
 
 public class Server02 {
@@ -75,6 +74,8 @@ public class Server02 {
             bw.write(responseInfo.toString());
             bw.flush();
             System.out.println(responseInfo.toString());
+
+            receive();
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("建立连接失败");
